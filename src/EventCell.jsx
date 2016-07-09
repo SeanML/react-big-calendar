@@ -2,8 +2,26 @@ import React from 'react';
 import cn from 'classnames';
 import dates from './utils/dates';
 import { accessor as get } from './utils/accessors';
+import Modal from 'react-modal';
+import EventModal from './EventModal'
 
-let EventCell = React.createClass({
+export default class EventCell extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      open: false,
+      currEvent: {}
+    };
+  }
+
+  passEvent(event) {
+    this.setState({
+      open: true,
+      currEvent: event
+    });
+  }
+
   render() {
     let {
         className, event, selected, eventPropGetter
@@ -23,26 +41,27 @@ let EventCell = React.createClass({
       var { style, className: xClassName } = eventPropGetter(event, start, end, selected);
 
     return (
-      <div
-        {...props}
-        style={{...props.style, ...style}}
-        className={cn('rbc-event', className, xClassName, {
-          'rbc-selected': selected,
-          'rbc-event-allday': isAllDay || dates.diff(start, dates.ceil(end, 'day'), 'day') > 1,
-          'rbc-event-continues-prior': continuesPrior,
-          'rbc-event-continues-after': continuesAfter
-        })}
-        onClick={()=> onSelect(event)}
-      >
-        <div className='rbc-event-content' title={title}>
-          { Component
-            ? <Component event={event} title={title}/>
-            : title
-          }
+      <div>
+        <div
+          {...props}
+          style={{...props.style, ...style}}
+          className={cn('rbc-event', className, xClassName, {
+            'rbc-selected': selected,
+            'rbc-event-allday': isAllDay || dates.diff(start, dates.ceil(end, 'day'), 'day') > 1,
+            'rbc-event-continues-prior': continuesPrior,
+            'rbc-event-continues-after': continuesAfter
+          })}
+          onClick={()=> this.passEvent(event)}
+        >
+          <div className='rbc-event-content' title={title}>
+            { Component
+              ? <Component event={event} title={title}/>
+              : title
+            }
+          </div>
         </div>
+        <EventModal value={this.state} />
       </div>
     );
   }
-});
-
-export default EventCell
+};

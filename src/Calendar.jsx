@@ -109,7 +109,10 @@ let Calendar = React.createClass({
      * function(event: object)
      * ```
      */
-    onSelectEvent: PropTypes.func,
+    onSelectEvent: (event) => {
+      console.log(event.selected);
+      return event.selected;
+    },
 
     /**
      * Callback fired when dragging a selection in the Time views.

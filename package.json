@@ -1,7 +1,7 @@
 {
-  "name": "react-big-calendar",
+  "name": "react-big-calendar-sledit",
   "version": "0.10.2",
-  "description": "Calendar! with events",
+  "description": "Calendar! with events, and popups",
   "author": "Jason Quense <monastic.panic@gmail.com>",
   "repository": "intljusticemission/react-big-calendar",
   "license": "MIT",
@@ -103,6 +103,7 @@
     "dom-helpers": "^2.3.0",
     "invariant": "^2.1.0",
     "lodash": "^3.10.1",
+    "react-modal": "^1.4.0",
     "react-overlays": "^0.6.0",
     "react-prop-types": "^0.2.1",
     "uncontrollable": "^3.1.0",
